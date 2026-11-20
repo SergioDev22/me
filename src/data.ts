@@ -118,7 +118,7 @@ export const experiences: Experience[] = [
   {
     role: "Développeur Odoo",
     company: "ABM INNOV",
-    period: "Juin 2025 - Aujourd'hui",
+    period: "Juin 2025 - Aujourd'hui (Temps partiel)",
     current: true,
     bullets: [
       "Conception et développement d'une plateforme de catalogue et de commande de pièces automobiles sous forme de module Odoo : frontend OWL/JavaScript, backend Python, moteur de recherche Elasticsearch.",
@@ -131,7 +131,7 @@ export const experiences: Experience[] = [
   {
     role: "Développeur Python",
     company: "KOLLEKTIV IT",
-    period: "Mars 2026 - Aujourd'hui",
+    period: "Mars 2026 - Décembre 2026",
     current: true,
     bullets: [
       "Conception et développement de pipelines de données en Python (extraction, transformation, chargement) pour l'ingestion et le traitement de données à grande échelle.",
