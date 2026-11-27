@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { profile } from "../data";
 import { NeonChip, gradientTextSx } from "./Shared";
 
-const roles = ["Python", "React", "Odoo", "GCP", "Django"];
+const roles = ["Python", "Go", "React", "Odoo 18", "GCP", "Elasticsearch", "Peppol"];
 
 export function Hero() {
   return (
@@ -63,7 +63,11 @@ export function Hero() {
               fontSize: { xs: "1.1rem", md: "1.5rem" },
             }}
           >
-            {profile.role} · basé à {profile.location}
+            {profile.role} · {profile.specialty}
+            <br />
+            <Box component="span" sx={{ fontSize: "0.8em", opacity: 0.8 }}>
+              Basé à {profile.location}
+            </Box>
           </Typography>
 
           <Typography
@@ -120,7 +124,9 @@ export function Hero() {
               Voir mes réalisations
             </Button>
             <Button
-              href="https://drive.google.com/file/d/102WDz_tE0jhsw-73LoitS087f9tKVAiK/view?usp=sharing"
+              href={profile.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               startIcon={<DownloadIcon />}
               variant="outlined"
               size="large"

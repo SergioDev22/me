@@ -4,7 +4,7 @@ import CodeIcon from "@mui/icons-material/Terminal";
 import CloudIcon from "@mui/icons-material/CloudQueue";
 import LayersIcon from "@mui/icons-material/Layers";
 import { motion } from "framer-motion";
-import { profile, highlights } from "../data";
+import { profile, highlights, stats } from "../data";
 import { GlassCard, Section, SectionHeading } from "./Shared";
 
 const icons = [CodeIcon, CloudIcon, LayersIcon];
@@ -22,8 +22,17 @@ export function About() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="h4" sx={{ color: "#fff", mb: 2 }}>
+            <Typography variant="h4" sx={{ color: "#fff", mb: 0.5 }}>
               {profile.role}
+            </Typography>
+            <Typography
+              sx={{
+                color: "neon.cyan",
+                fontFamily: '"JetBrains Mono", monospace',
+                mb: 2,
+              }}
+            >
+              {profile.specialty}
             </Typography>
             <Typography
               sx={{ color: "text.secondary", lineHeight: 1.9, mb: 3 }}
@@ -31,7 +40,9 @@ export function About() {
               {profile.about}
             </Typography>
             <Button
-              href="https://drive.google.com/file/d/102WDz_tE0jhsw-73LoitS087f9tKVAiK/view?usp=sharing"
+              href={profile.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               startIcon={<DownloadIcon />}
               variant="contained"
               sx={{
@@ -79,20 +90,52 @@ export function About() {
               />
               <Box
                 component="img"
-                src="https://avatars.githubusercontent.com/u/85986819?v=4"
-                alt="Photo de profil"
+                src={profile.photo}
+                alt={`Photo de ${profile.name}`}
                 sx={{
                   width: "calc(100% - 12px)",
                   height: "calc(100% - 12px)",
                   borderRadius: "50%",
                   objectFit: "cover",
-                  objectPosition: "center top",
+                  objectPosition: "center 22%",
                   display: "block",
                 }}
               />
             </Box>
           </motion.div>
         </Grid>
+      </Grid>
+
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {stats.map((s, i) => (
+          <Grid key={s.label} size={{ xs: 6, md: 3 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              style={{ height: "100%" }}
+            >
+              <GlassCard sx={{ p: 2.5, textAlign: "center", height: "100%" }}>
+                <Typography
+                  sx={{
+                    fontFamily: '"Orbitron", sans-serif',
+                    fontWeight: 700,
+                    fontSize: { xs: "1.5rem", md: "1.9rem" },
+                    background: "linear-gradient(90deg, #22e8ff, #a855f7)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {s.value}
+                </Typography>
+                <Typography sx={{ color: "text.secondary", fontSize: "0.8rem", mt: 0.5 }}>
+                  {s.label}
+                </Typography>
+              </GlassCard>
+            </motion.div>
+          </Grid>
+        ))}
       </Grid>
 
       <Grid container spacing={3}>

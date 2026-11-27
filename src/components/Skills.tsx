@@ -6,9 +6,9 @@ import { GlassCard, Section, SectionHeading } from "./Shared";
 
 const CATEGORIES: ("Toutes" | SkillCategory)[] = [
   "Toutes",
-  "Front-end",
-  "Back-end",
-  "Data & bases de données",
+  "Langages & Back-end",
+  "Front-end & Mobile",
+  "Data & intégrations",
   "Cloud & DevOps",
 ];
 

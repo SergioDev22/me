@@ -3,6 +3,18 @@ import { motion } from "framer-motion";
 import { experiences } from "../data";
 import { GlassCard, Section, SectionHeading } from "./Shared";
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <Box component="ul" sx={{ m: 0, mt: 0.75, pl: 2.2, color: "text.secondary" }}>
+      {items.map((b, idx) => (
+        <Typography key={idx} component="li" sx={{ fontSize: "0.85rem", lineHeight: 1.75, mb: 0.8 }}>
+          {b}
+        </Typography>
+      ))}
+    </Box>
+  );
+}
+
 export function Experience() {
   return (
     <Section id="experience">
@@ -54,7 +66,7 @@ export function Experience() {
                 <motion.div
                   initial={{ opacity: 0, x: leftSide ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.05 }}
                   transition={{ duration: 0.5 }}
                 >
                   <GlassCard>
@@ -87,19 +99,42 @@ export function Experience() {
                       {exp.company}
                     </Typography>
                     <Typography sx={{ color: "text.secondary", fontSize: "0.78rem", mb: 2 }}>
-                      {exp.period}
+                      {exp.period} · {exp.type}
                     </Typography>
-                    <Box component="ul" sx={{ m: 0, pl: 2.2, color: "text.secondary" }}>
-                      {exp.bullets.map((b, idx) => (
-                        <Typography
-                          key={idx}
-                          component="li"
-                          sx={{ fontSize: "0.85rem", lineHeight: 1.75, mb: 0.8 }}
-                        >
-                          {b}
+                    {exp.bullets && <BulletList items={exp.bullets} />}
+                    {exp.groups?.map((g) => (
+                      <Box key={g.name} sx={{ mb: 2 }}>
+                        <Typography sx={{ color: "#fff", fontWeight: 600, fontSize: "0.9rem" }}>
+                          {g.name}
+                          <Box
+                            component="span"
+                            sx={{ color: "text.secondary", fontWeight: 400, fontSize: "0.8rem" }}
+                          >
+                            {" · "}
+                            {g.context}
+                          </Box>
                         </Typography>
-                      ))}
-                    </Box>
+                        <BulletList items={g.bullets} />
+                      </Box>
+                    ))}
+                    {exp.stack && (
+                      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.75, mt: 1.5 }}>
+                        {exp.stack.map((t) => (
+                          <Chip
+                            key={t}
+                            label={t}
+                            size="small"
+                            sx={{
+                              height: 22,
+                              fontSize: "0.68rem",
+                              bgcolor: "rgba(168,85,247,0.08)",
+                              color: "neon.violet",
+                              border: "1px solid rgba(168,85,247,0.25)",
+                            }}
+                          />
+                        ))}
+                      </Box>
+                    )}
                   </GlassCard>
                 </motion.div>
               </Box>
