@@ -15,10 +15,10 @@ export function Footer() {
           </GradientText>
           <Typography sx={{ color: "text.secondary", maxWidth: 520, mx: "auto", mb: 4 }}>
             Basé à {profile.location} — disponible pour des missions freelance ou des opportunités full
-            stack Python / React.
+            stack Python / Go / React, Odoo et data GCP.
           </Typography>
           <Button
-            href="mailto:contact@sergio.dev"
+            href={`mailto:${profile.email}`}
             startIcon={<EmailIcon />}
             variant="contained"
             size="large"
@@ -35,10 +35,17 @@ export function Footer() {
           </Button>
 
           <Stack direction="row" spacing={1.5} sx={{ justifyContent: "center", mb: 4 }}>
-            {[GitHubIcon, LinkedInIcon, EmailIcon].map((Icon, i) => (
+            {[
+              { Icon: GitHubIcon, href: profile.github, label: "GitHub" },
+              { Icon: LinkedInIcon, href: profile.linkedin, label: "LinkedIn" },
+              { Icon: EmailIcon, href: `mailto:${profile.email}`, label: "E-mail" },
+            ].map(({ Icon, href, label }) => (
               <IconButton
-                key={i}
-                href="#"
+                key={label}
+                href={href}
+                aria-label={label}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
                 sx={{
                   color: "text.secondary",
                   border: "1px solid rgba(148,163,255,0.16)",
